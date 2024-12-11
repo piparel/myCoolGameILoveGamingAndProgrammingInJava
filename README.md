@@ -19,6 +19,7 @@ Our project can be played casually without stress
 Its useful for us to study and write code to understand how it works
 We reinforce the knowledge that we learned during lessons to use it in real situations
 We learn to code cooperatively and finish a project in a group of 2
+The project will teach us how to separate our tasks and complete them on our own so that there is one finished working product
 
 ### How will we do it
 Using no external libraries we will code the necessary elements for an RPG game
