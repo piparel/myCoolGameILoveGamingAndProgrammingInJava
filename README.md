@@ -10,6 +10,7 @@ Simple text-based RPG game in Java similar to an RPG Discord Bot
 - Adventuring and navigating through a map
 - Simple Combat
 - Cool ASCII art!!!
+- VERY COOL GAMBLING (legal)
 - ...
 
 ### Why its useful
