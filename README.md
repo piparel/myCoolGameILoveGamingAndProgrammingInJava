@@ -16,13 +16,13 @@ Simple text-based RPG game in Java similar to an RPG Discord Bot
 Playing games is fun and gets your mind off of things
 Our project can be played casually without stress
 
-Its useful for us to study and write code to understand how it works
-We reinforce the knowledge that we learned during lessons to use it in real situations
+Its useful for us to study and write code to understand how it works.
+We reinforce the knowledge that we learned during lessons to use it in real situations.
 We learn to code cooperatively and finish a project in a group of 2
 
 ### How will we do it
-Using no external libraries we will code the necessary elements for an RPG game
-The previously learned topics like Classes and Encapsulation will be used to implement the desired features, so that the user gets a smooth playing experience
+Using no external libraries we will code the necessary elements for an RPG game.
+The previously learned topics like Classes and Encapsulation will be used to implement the desired features, so that the user gets a smooth playing experience.
 The gameplay will be in the console and actions will be done by console commands
 
 
