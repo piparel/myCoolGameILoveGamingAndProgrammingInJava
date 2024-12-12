@@ -1,18 +1,18 @@
-import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class Character {
 
     private String name;
-    private String cClass; 
+    private String characterClass; 
     Scanner scanner = new Scanner(System.in);  
-
 
     public Character() {
         this.name = assignName();
         Utility.clearScreen();
-        this.cClass = assigncClass();
+        this.characterClass = assignCharacterClass();
         Utility.clearScreen();
     }
 
@@ -21,7 +21,7 @@ public class Character {
         return scanner.nextLine();
     }
 
-    public String assigncClass(){
+    public String assignCharacterClass(){
 
         String[] classes = {"Warrior", "Mage", "Archer"};
 
@@ -45,12 +45,26 @@ public class Character {
         return chosenClass;
     }
 
-    public String getcClass(){
-        return cClass;
+    public String getCharacterClass(){
+        return characterClass;
     }
     public String getName(){
         return name;
     }
+
+    public void createCharacterFile(){
+        try{
+            FileWriter file = new FileWriter(name + ".csv");
+            file.write(name + ","+ characterClass);
+            file.close();
+        }   
+        catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
 }
+
+
 
 
