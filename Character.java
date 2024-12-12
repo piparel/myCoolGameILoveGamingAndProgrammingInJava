@@ -10,18 +10,18 @@ public class Character {
 
 
     public Character() {
-        this.name = setName();
+        this.name = assignName();
         Utility.clearScreen();
-        this.cClass = setcClass();
+        this.cClass = assigncClass();
         Utility.clearScreen();
     }
 
-    public String setName(){
+    public String assignName(){
         System.out.println("Whose legacy will be told? :");
         return scanner.nextLine();
     }
 
-    public String setcClass(){
+    public String assigncClass(){
 
         String[] classes = {"Warrior", "Mage", "Archer"};
 
@@ -44,9 +44,12 @@ public class Character {
         }
         return chosenClass;
     }
-    public static void main(String[] args){
-        Character player = new Character();      
-        System.out.println("The brave " + player.cClass+ " " + player.name + " ventures to write his own legacy");
+
+    public String getcClass(){
+        return cClass;
+    }
+    public String getName(){
+        return name;
     }
 }
 
