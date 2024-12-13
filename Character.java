@@ -14,6 +14,7 @@ public class Character {
         Utility.clearScreen();
         this.characterClass = assignCharacterClass();
         Utility.clearScreen();
+        
     }
 
     public String assignName(){
@@ -23,7 +24,7 @@ public class Character {
 
     public String assignCharacterClass(){
 
-        String[] classes = {"Warrior", "Mage", "Archer"};
+        String[] classes = {"warrior", "mage", "archer"};
 
         boolean chosen = false;
         String chosenClass = "";
@@ -31,7 +32,7 @@ public class Character {
         while (chosen == false){
 
             System.out.println("Which class are you? :");
-            System.out.println("[Warrior], [Mage], [Archer]");
+            System.out.println("[warrior], [mage], [archer]");
             chosenClass = scanner.nextLine();
 
             if(Arrays.asList(classes).contains(chosenClass)){
@@ -52,14 +53,48 @@ public class Character {
         return name;
     }
 
-    public void createCharacterFile(){
+    public void createCharacterFile() {
+
+        int health;
+        int armor;
+        int strength;
+        int agility;
+        int luck;
+        double critrate;
+
+        int coins = 0;
+
+        if (characterClass == "Warrior"){
+            health = 6;
+            armor = 2;
+            strength = 4;
+            agility = 0;
+            luck = 0;
+            critrate = 3;
+        }
+        else if (characterClass == "Mage"){
+            health = 4;
+            armor = 0;
+            strength = 5;
+            agility = 1;
+            luck = 2;
+            critrate = 0;
+        }
+        else{
+            health = 4;
+            armor = 1;
+            strength = 3;
+            agility = 3;
+            luck = 1;
+            critrate = 5;
+        }
         try{
-            FileWriter file = new FileWriter(name + ".csv");
-            file.write(name + ","+ characterClass);
+            FileWriter file = new FileWriter("Characters/" + name + ".csv");
+            file.write(name + ","+ characterClass + "," + health + "," + armor + "," + strength + "," + agility + "," + luck+ "," + critrate + "," + coins);
             file.close();
-        }   
+        }
         catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred!");
             e.printStackTrace();
         }
     }
