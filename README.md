@@ -4,13 +4,14 @@
 Simple text-based RPG game in Java similar to an RPG Discord Bot
 
 ### Features
-- Leveling up system
-- Fishing
-- Touching grass
-- Adventuring and navigating through a map
+- Characters (Arturs)
+- Leveling up system (Arturs)
+- Fishing (Daniel)
+- Touching grass (noone)
+- Adventuring and navigating through a map (Arturs)
 - Simple Combat
-- Cool ASCII art!!!
-- VERY COOL GAMBLING (legal)
+- Cool ASCII art!!! (both)
+- VERY COOL GAMBLING (legal) (Daniel?)
 - ...
 
 ### Why its useful
