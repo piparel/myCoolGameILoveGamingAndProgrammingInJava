@@ -9,12 +9,27 @@ public class Character {
     private String characterClass; 
     Scanner scanner = new Scanner(System.in);  
 
+    private int health;
+    private int armor;
+    private int strength;
+    private int agility;
+    private int luck;
+    private double critrate;
+    private int coins;
+
     public Character() {
         this.name = assignName();
         Utility.clearScreen();
         this.characterClass = assignCharacterClass();
         Utility.clearScreen();
-        
+
+        assignHealth();
+        assignArmor();
+        assignStrength();
+        assignAgility();
+        assignLuck();
+        assignCritrate();
+        this.coins = 0;
     }
 
     public String assignName(){
@@ -46,48 +61,105 @@ public class Character {
         return chosenClass;
     }
 
-    public String getCharacterClass(){
-        return characterClass;
+    public void assignHealth(){
+        System.out.println(this.characterClass);
+        switch(characterClass){
+            case "warrior":
+            this.health = 6;
+            break;
+
+            case "mage":
+            this.health = 4;
+            break;
+
+            case "archer":
+            this.health = 3;
+            break;
+        }
     }
-    public String getName(){
-        return name;
+
+    public void assignArmor(){
+        switch(characterClass){
+            case "warrior":
+            this.armor = 3;
+            break;
+
+            case "mage":
+            this.armor = 0;
+            break;
+
+            case "archer":
+            this.armor = 1;
+            break;
+        }
+    }
+
+    public void assignStrength(){
+        switch(characterClass){
+            case "warrior":
+            this.strength = 4;
+            break;
+
+            case "mage":
+            this.strength = 5;
+            break;
+
+            case "archer":
+            this.strength = 3;
+            break;
+        }
+    }
+
+    public void assignAgility(){
+        switch(characterClass){
+            case "warrior":
+            this.agility = 0;
+            break;
+
+            case "mage":
+            this.agility = 1;
+            break;
+
+            case "archer":
+            this.agility = 3;
+            break;
+        }
+    }
+
+    public void assignLuck(){
+        switch(characterClass){
+            case "warrior":
+            this.luck = 0;
+            break;
+
+            case "mage":
+            this.luck = 2;
+            break;
+
+            case "archer":
+            this.luck = 1;
+            break;
+        }
+    }
+
+    public void assignCritrate(){
+        switch(characterClass){
+            case "warrior":
+            this.critrate = 2.0;
+            break;
+
+            case "mage":
+            this.critrate = 0.0;
+            break;
+
+            case "archer":
+            this.critrate = 5.0;
+            break;
+        }
     }
 
     public void createCharacterFile() {
 
-        int health;
-        int armor;
-        int strength;
-        int agility;
-        int luck;
-        double critrate;
-
-        int coins = 0;
-
-        if (characterClass == "Warrior"){
-            health = 6;
-            armor = 2;
-            strength = 4;
-            agility = 0;
-            luck = 0;
-            critrate = 3;
-        }
-        else if (characterClass == "Mage"){
-            health = 4;
-            armor = 0;
-            strength = 5;
-            agility = 1;
-            luck = 2;
-            critrate = 0;
-        }
-        else{
-            health = 4;
-            armor = 1;
-            strength = 3;
-            agility = 3;
-            luck = 1;
-            critrate = 5;
-        }
         try{
             FileWriter file = new FileWriter("Characters/" + name + ".csv");
             file.write(name + ","+ characterClass + "," + health + "," + armor + "," + strength + "," + agility + "," + luck+ "," + critrate + "," + coins);
@@ -98,7 +170,109 @@ public class Character {
             e.printStackTrace();
         }
     }
+
+    public void increaseHealth(int x){
+        this.health += x;
+    }
+
+    public void decreaseHealth(int x){
+        if (this.health - x <= 0){
+            this.health = 0;
+        }
+        else{
+            this.health -= x;
+        }
+    }
+
+    public void increaseArmor(int x){
+        this.armor += x;
+    }
+
+    public void decreaseArmor(int x){
+        if (this.armor - x <= 0){
+            this.armor = 0;
+        }
+        else{
+            this.armor -= x;
+        }
+    }
+
+    public void increaseStrength(int x){
+        this.strength += x;
+    }
+
+    public void decreaseStrength(int x){
+        if (this.strength - x <= 0){
+            this.strength = 0;
+        }
+        else{
+            this.strength -= x;
+        }
+    }
+
+    public void increaseAgility(int x){
+        this.agility += x;
+    }
+
+    public void decreaseAgility(int x){
+        if (this.agility - x <= 0){
+            this.agility = 0;
+        }
+        else{
+            this.agility -= x;
+        }
+    }
+
+    public void increaseLuck(int x){
+        this.luck += x;
+    }
+
+    public void decreaseLuck(int x){
+        this.luck -= x;
+    }
+
+    public void increaseCritrate(int x){
+        this.critrate += x;
+    }
+
+    public void decreaseCritrate(int x){
+        if (this.critrate - x <= 0){
+            this.critrate = 0;
+        }
+        else{
+            this.critrate -= x;
+        }
+    }
+
+    public String getCharacterClass(){
+        return characterClass;
+    }
+    public String getName(){
+        return name;
+    }
+    public int getHealth(){
+        return health;
+    }
+    public int getArmor(){
+        return armor;
+    }
+    public int getStrength(){
+        return strength;
+    }
+    public int getAgility(){
+        return agility;
+    }
+    public int getLuck(){
+        return luck;
+    }
+    public double getCritrate(){
+        return critrate;
+    }
+    public int getCoins(){
+        return coins;
+    }
 }
+
 
 
 
