@@ -8,7 +8,7 @@ public class Fish extends Item {
 
     public static void catchFish(Inventory inv) {
         Fish caughtFish = new Fish(Rarity.COMMON, "Empty");
-        int randomNumber = rand.nextInt(0, 100);
+        int randomNumber = rand.nextInt(100);
 
         Utility.clearScreen();
 

@@ -5,9 +5,10 @@ import java.util.Arrays;
 
 public class Character {
 
+    Scanner scanner = new Scanner(System.in);  
+
     private String name;
     private String characterClass; 
-    Scanner scanner = new Scanner(System.in);  
 
     private int health;
     private int armor;
