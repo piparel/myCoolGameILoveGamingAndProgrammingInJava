@@ -16,10 +16,14 @@ public class World {
     private void generateMap(){
         initializeMap();
         boolean builderSpawned = false;
+        boolean shopPlaced = false;
+        boolean pondPlaced = false;
+        boolean casinoPlaced = false;
         int builderMoveDirection = 0;
         int allocatedBlocks = 0;
         int rootX = SIZE/2; int rootY = SIZE/2;
         int stepped = 0;
+
 
         int cx = 0;
         int cy = 0;
@@ -59,6 +63,31 @@ public class World {
 					}} else { builderSpawned=false;}
             }
         }
+        while (shopPlaced == false){
+            cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            if (map[cx][cy] == "·"){
+                map[cx][cy] = "s";
+                shopPlaced = true;
+            }
+        }
+        while (pondPlaced == false){
+            cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            if (map[cx][cy] == "·"){
+                map[cx][cy] = "p";
+                pondPlaced = true;
+            }
+        }
+        while (casinoPlaced == false){
+            cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            if (map[cx][cy] == "·"){
+                map[cx][cy] = "c";
+                casinoPlaced = true;
+            } 
+        }
+
         for (String[] row : map) {
             System.out.println(String.join("  ", row));
         }
