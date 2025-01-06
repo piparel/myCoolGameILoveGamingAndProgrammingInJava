@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Character {
 
@@ -14,7 +15,10 @@ public class Character {
     private int strength;
     private int agility;
     private int luck;
+
     private double critrate;
+    private static Random critRandom = new Random();
+
     private int coins;
 
     public Character() {
@@ -30,6 +34,18 @@ public class Character {
         assignLuck();
         assignCritrate();
         this.coins = 0;
+    }
+
+    // TODO Setters
+    public Character( int health, int armor, int strength, int agility, int luck, double critrate, int coins) {
+        this.health = health;
+        this.armor = armor;
+        this.strength = strength;
+        this.agility = agility;
+        this.luck = luck;
+        this.critrate = critrate;
+        this.coins = coins;
+
     }
 
     public String assignName(){
@@ -271,6 +287,23 @@ public class Character {
     public int getCoins(){
         return coins;
     }
+
+    public void attack(Enemy enemy) {
+        boolean successfulCrit = false;
+
+        // check for random crit
+        double randomNumber = critRandom.nextInt(1, 101);
+        if (randomNumber < critrate) {
+            successfulCrit = true;
+        }
+
+        int finalHit = strength - enemy.getArmor();
+        if (successfulCrit) { 
+            finalHit *= 2;
+        }
+        enemy.decreaseHealth(finalHit);
+    }
+
 }
 
 

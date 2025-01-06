@@ -13,7 +13,7 @@ public class GamblingTest {
 
         if (answer.equals("y")) {
             myCoins -= 10;
-            myCoins = myCoins + slots.roll();
+            myCoins = myCoins + slots.roll(10);
         }
 
         else {

@@ -53,7 +53,7 @@ public class Fish extends Item {
             System.out.println("");
         }
 
-        else if (randomNumber < 100) {
+        else if (randomNumber <= 100) {
             caughtFish = new Fish(Rarity.LEGENDARY, "Catfish");
             inv.addItem(caughtFish);
             System.out.println("");
