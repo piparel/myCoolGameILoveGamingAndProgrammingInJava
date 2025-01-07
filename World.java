@@ -4,12 +4,21 @@ import java.util.Scanner;
 public class World {
     private static final int SIZE = 24;
     private String[][] map = new String[SIZE + 1][SIZE + 1];
+    private int[] pondTile = new int[2];
     Random random = new Random();
 
     String savedPlace = "·";
 
     private int playerPosX;
     private int playerPosY; 
+
+    public int getPondx() {
+        return pondTile[0];
+    }
+
+    public int getPondy() {
+        return pondTile[1];
+    }
 
     private void initializeMap() {
         for (int x = 0; x <= SIZE; x++) {
@@ -84,6 +93,8 @@ public class World {
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             if (map[cx][cy] == "·"){
                 map[cx][cy] = "p";
+                pondTile[1] = cx;
+                pondTile[0] = cy;
                 pondPlaced = true;
             }
         }
@@ -136,48 +147,48 @@ public class World {
         if (map[playerPosY][playerPosX-1] !="■"){canMoveLeft = true;}
 
         if (canMoveUp) {
-            movementOptions.append("[up]");
+            movementOptions.append("[u]p");
             hasOptions = true;
         }
         if (canMoveDown) {
             if (hasOptions) {movementOptions.append(", ");}
-            movementOptions.append("[down]");
+            movementOptions.append("[d]own");
             hasOptions = true;
         }
         if (canMoveRight) {
             if (hasOptions) {movementOptions.append(", ");}
-            movementOptions.append("[right]");
+            movementOptions.append("[r]ight");
             hasOptions = true;
         }
         if (canMoveLeft) {
             if (hasOptions) {movementOptions.append(", ");}
-            movementOptions.append("[left]");
+            movementOptions.append("[l]eft");
         }
         System.out.println(movementOptions);
         String direction = scanner.nextLine();
 
-        if (canMoveUp && direction.equals("up")){
+        if (canMoveUp && direction.equals("u")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY-1][playerPosX];
             map[playerPosY-1][playerPosX] = "¤";
 
             playerPosY -= 1;
         }
-        else if (canMoveDown && direction.equals("down")){
+        else if (canMoveDown && direction.equals("d")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY+1][playerPosX];
             map[playerPosY+1][playerPosX] = "¤";
 
             playerPosY += 1;
         }
-        else if (canMoveRight && direction.equals("right")){
+        else if (canMoveRight && direction.equals("r")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY][playerPosX+1];
             map[playerPosY][playerPosX+1] = "¤";
 
             playerPosX += 1;
         }
-        else if (canMoveLeft && direction.equals("left")){
+        else if (canMoveLeft && direction.equals("l")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY][playerPosX-1];
             map[playerPosY][playerPosX-1] = "¤";
