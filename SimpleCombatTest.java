@@ -1,5 +1,3 @@
-import java.util.Scanner;
-import java.util.Random;
 
 public class SimpleCombatTest {
     public static void main(String[] args) {
