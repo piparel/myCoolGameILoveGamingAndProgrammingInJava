@@ -31,3 +31,5 @@ The gameplay will be in the console and actions will be done by console commands
 
 Our game will need low memory and very low minimal requirements so the game can be enjoyed even on samsung smart fridges or your smart watch!!!
 
+
+TODO: UML Diagram https://mermaid.live/

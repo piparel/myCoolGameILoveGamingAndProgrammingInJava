@@ -7,6 +7,11 @@ public class Inventory {
     private int inventoryLength = inventoryItems.length;
     private boolean isFull = false;
     private final Scanner scanner = new Scanner(System.in);
+    private Character player; 
+
+    public void belongsTo(Character player) {
+        this.player = player;
+    }
 
 
     public void addItem(int index, Item item) {
@@ -54,6 +59,7 @@ public class Inventory {
             System.out.println("");
             System.out.println("press [q] to close your inventory");
             System.out.println("press [d] to drop an item");
+            System.out.println("press [e] to use an Item");
             userString = scanner.nextLine();
 
             switch (userString) {
@@ -67,12 +73,28 @@ public class Inventory {
                     removeItem(index);
                     break;
 
+
+                case "e":
+                    System.out.println("Enter the index of the item you would like to use");
+                    index = scanner.nextInt();
+                    if (inventoryItems[index] instanceof Fish) {
+                        eat(index);
+                             
+                    }
+                    return;
+
                 default: 
                     System.out.println("invalid choice at OpenInventory");
             }
 
         }
 
+    }
+
+    public void eat(int index) {
+        System.out.println("you ate the " + inventoryItems[index] + " and gained " + inventoryItems[index].getHealAmount() + " HP");
+        player.increaseHealth(inventoryItems[index].getHealAmount());
+        removeItem(index);
     }
 
     public String toString() {

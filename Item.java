@@ -3,6 +3,7 @@
 public class Item {
     private Rarity rarity;
     private String name;
+    private int healAmount;
 
     public Item() {
         this(Rarity.COMMON, "DefaultItem");
@@ -11,6 +12,14 @@ public class Item {
     public Item(Rarity rarity, String name) {
         setRarity(rarity);
         setName(name);
+    }
+
+    public void setHealAmount(int num) {
+        this.healAmount = num;
+    }
+
+    public int getHealAmount() {
+        return this.healAmount;
     }
 
     public void setRarity(Rarity rarity) {

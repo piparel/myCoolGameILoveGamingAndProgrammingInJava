@@ -7,11 +7,15 @@ import java.util.Random;
 public class Character {
 
     Scanner scanner = new Scanner(System.in);  
+    
 
     private String name;
     private String characterClass; 
+    private String weakness;
+    private Inventory inv;
 
     private int health;
+    final private int maxHealth;
     private int armor;
     private int strength;
     private int agility;
@@ -23,9 +27,19 @@ public class Character {
     private int coins;
 
     public Character() {
+        this.inv = new Inventory();
+        inv.belongsTo(this);
         this.name = assignName();
         Utility.clearScreen();
         this.characterClass = assignCharacterClass();
+        if (this.characterClass == "warrior") {
+            this.weakness = "mage";
+        } else if (this.characterClass == "mage") {
+            this.weakness = "archer";
+        } else {
+            this.weakness = "warrior";
+        }
+
         Utility.clearScreen();
 
         assignHealth();
@@ -35,11 +49,15 @@ public class Character {
         assignLuck();
         assignCritrate();
         this.coins = 0;
+        this.maxHealth = this.health;
     }
 
     // TODO Setters
     public Character( int health, int armor, int strength, int agility, int luck, double critrate, int coins) {
+        this.inv = new Inventory();
+        inv.belongsTo(this);
         this.health = health;
+        this.maxHealth = health;
         this.armor = armor;
         this.strength = strength;
         this.agility = agility;
@@ -49,9 +67,21 @@ public class Character {
 
     }
 
+    public void openInventory() {
+        this.inv.openInventory();
+    }
+
+    public void fish() {
+        Fish.catchFish(inv);
+    }
+
     public String assignName(){
         System.out.println("Whose legacy will be told? :");
         return scanner.nextLine();
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String assignCharacterClass(){
@@ -270,6 +300,11 @@ public class Character {
     public int getHealth(){
         return health;
     }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
     public int getArmor(){
         return armor;
     }
@@ -303,6 +338,16 @@ public class Character {
             finalHit *= 2;
         }
         enemy.decreaseHealth(finalHit);
+    }
+
+    public boolean run() {
+        if (critRandom.nextInt(2) == 1) {
+            System.out.println("You managed to run away!");
+            return true;
+        }
+        System.out.println("You were not able to run away!");
+        return false;
+
     }
 
 }

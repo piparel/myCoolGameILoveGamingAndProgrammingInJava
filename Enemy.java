@@ -5,24 +5,33 @@ public class Enemy {
     private String characterClass; 
 
     private int health;
+    private final int maxHealth;
     private int armor;
     private int strength;
     private int agility;
     private double critrate;
+    private String enemyClass;
 
     private static Random critRandom = new Random();
 
     // TODO proper setters
-    public Enemy(int health, int armor, int strength, int agility, double critrate) {
+    public Enemy(int health, int armor, int strength, int agility, double critrate, String enemyClass) {
         this.health = health;
+        this.maxHealth = health;
         this.armor = armor;
         this.strength = strength;
         this.agility = agility;
         this.critrate = critrate;
+        // cant use "class" because of java
+        this.enemyClass = enemyClass;
     }
 
     public Enemy() {
-        this(100, 0, 5, 0, 2);
+        this(100, 0, 5, 0, 2, "warrior");
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void increaseHealth(int x){
@@ -98,6 +107,9 @@ public class Enemy {
     }
     public int getHealth(){
         return health;
+    }
+    public int getMaxHealth() {
+        return maxHealth;
     }
     public int getArmor(){
         return armor;
