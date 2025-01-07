@@ -1,9 +1,15 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class World {
     private static final int SIZE = 24;
     private String[][] map = new String[SIZE + 1][SIZE + 1];
     Random random = new Random();
+
+    String savedPlace = "·";
+
+    private int playerPosX;
+    private int playerPosY; 
 
     private void initializeMap() {
         for (int x = 0; x <= SIZE; x++) {
@@ -13,12 +19,14 @@ public class World {
         }
     }
 
-    private void generateMap(){
+    public void generateMap(){
         initializeMap();
         boolean builderSpawned = false;
         boolean shopPlaced = false;
         boolean pondPlaced = false;
         boolean casinoPlaced = false;
+        boolean player = false;
+
         int builderMoveDirection = 0;
         int allocatedBlocks = 0;
         int rootX = SIZE/2; int rootY = SIZE/2;
@@ -87,14 +95,98 @@ public class World {
                 casinoPlaced = true;
             } 
         }
+        while (player == false){
+            cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
+            if (map[cx][cy] == "·"){
+                map[cx][cy] = "¤";
+                playerPosY = cx;
+                playerPosX = cy;
 
+                player = true;
+            }
+        }
+    }
+    public void getMap(){
         for (String[] row : map) {
-            System.out.println(String.join("  ", row));
+            System.out.println(String.join(" ", row));
         }
     }
 
-    public static void main(String[] args) {
-        World map = new World();
-        map.generateMap();
+    public int getPlayerPosX(){
+        return playerPosX;
+    }
+    public int getPlayerPosY(){
+        return playerPosY;
+    }
+
+    public void move(){
+        boolean canMoveUp = false;
+        boolean canMoveDown = false;
+        boolean canMoveRight = false;
+        boolean canMoveLeft = false;
+        boolean hasOptions = false;
+        StringBuilder movementOptions = new StringBuilder("Where would you like to go, you can move ");
+
+        Scanner scanner = new Scanner(System.in);
+
+        if (map[playerPosY+1][playerPosX] !="■"){canMoveDown = true;}
+        if (map[playerPosY-1][playerPosX] !="■"){canMoveUp = true;}
+        if (map[playerPosY][playerPosX+1] !="■"){canMoveRight = true;}
+        if (map[playerPosY][playerPosX-1] !="■"){canMoveLeft = true;}
+
+        if (canMoveUp) {
+            movementOptions.append("[up]");
+            hasOptions = true;
+        }
+        if (canMoveDown) {
+            if (hasOptions) {movementOptions.append(", ");}
+            movementOptions.append("[down]");
+            hasOptions = true;
+        }
+        if (canMoveRight) {
+            if (hasOptions) {movementOptions.append(", ");}
+            movementOptions.append("[right]");
+            hasOptions = true;
+        }
+        if (canMoveLeft) {
+            if (hasOptions) {movementOptions.append(", ");}
+            movementOptions.append("[left]");
+        }
+        System.out.println(movementOptions);
+        String direction = scanner.nextLine();
+
+        if (canMoveUp && direction.equals("up")){
+            map[playerPosY][playerPosX] = savedPlace;
+            savedPlace = map[playerPosY-1][playerPosX];
+            map[playerPosY-1][playerPosX] = "¤";
+
+            playerPosY -= 1;
+        }
+        else if (canMoveDown && direction.equals("down")){
+            map[playerPosY][playerPosX] = savedPlace;
+            savedPlace = map[playerPosY+1][playerPosX];
+            map[playerPosY+1][playerPosX] = "¤";
+
+            playerPosY += 1;
+        }
+        else if (canMoveRight && direction.equals("right")){
+            map[playerPosY][playerPosX] = savedPlace;
+            savedPlace = map[playerPosY][playerPosX+1];
+            map[playerPosY][playerPosX+1] = "¤";
+
+            playerPosX += 1;
+        }
+        else if (canMoveLeft && direction.equals("left")){
+            map[playerPosY][playerPosX] = savedPlace;
+            savedPlace = map[playerPosY][playerPosX-1];
+            map[playerPosY][playerPosX-1] = "¤";
+
+            playerPosX -= 1;
+        }
+        else{
+            System.out.println("NOT VALID BRO WTF smh");
+        }
     }
 }
+
