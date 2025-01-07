@@ -22,7 +22,7 @@ public class SimpleCombatTest {
         }
 
         else {
-            int randomNumber = coinflip.nextInt(0, 2);
+            int randomNumber = coinflip.nextInt(2);
             counter = randomNumber;
             
         }
@@ -48,7 +48,7 @@ public class SimpleCombatTest {
                     System.out.println("[f]ight or try to [r]un");
                     String playerInput = scanner.nextLine();
                     if (playerInput.equals("r")) {
-                        if (coinflip.nextInt(0, 2) == 1) {
+                        if (coinflip.nextInt(2) == 1) {
                             done = true;
                         }
 

@@ -117,7 +117,7 @@ public class Enemy {
         boolean successfulCrit = false;
 
         // check for random crit
-        double randomNumber = critRandom.nextInt(1, 101);
+        double randomNumber = critRandom.nextInt(101);
         if (randomNumber < critrate) {
             successfulCrit = true;
         }
