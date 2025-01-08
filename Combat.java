@@ -22,7 +22,7 @@ public class Combat {
 
         else {
             //random start
-            int randomNumber = random.nextInt(0, 2);
+            int randomNumber = random.nextInt(2);
             counter = randomNumber;
             
         }
