@@ -80,6 +80,8 @@ public class World {
 					}} else { builderSpawned=false;}
             }
         }
+
+        //---Special places that spawn after map creation, only places them in valid spots---
         while (shopPlaced == false){
             cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
@@ -117,13 +119,13 @@ public class World {
                 player = true;
             }
         }
+        //-------------------------------------------------------------------------------------
     }
     public void getMap(){
         for (String[] row : map) {
             System.out.println(String.join(" ", row));
         }
     }
-
     public int getPlayerPosX(){
         return playerPosX;
     }
