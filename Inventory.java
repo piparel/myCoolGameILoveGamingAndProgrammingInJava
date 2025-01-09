@@ -92,9 +92,14 @@ public class Inventory {
                 case "i":
                     isEquipmentOpen = true;
                     System.out.println(this.toString(isEquipmentOpen));
-                    index = scanner.nextInt();
-                    return;
-                    
+                    System.out.println("press [q] to close your equipment");
+                    userString = scanner.nextLine();
+                    switch (userString) {
+                        case "q":
+                            isEquipmentOpen = false;
+                            return;
+                    }
+                    break;
 
                 default: 
                     System.out.println("invalid choice at OpenInventory");
@@ -105,22 +110,36 @@ public class Inventory {
     }
 
     public void eat(int index) {
+
         System.out.println("you ate the " + inventoryItems[index] + " and gained " + inventoryItems[index].getHealAmount() + " HP");
         player.increaseHealth(inventoryItems[index].getHealAmount());
         removeItem(index);
     }
-    public void equip(int index){
-        
-        if (inventoryItems[index].getItemClass() == ItemClass.WEAPON){
-            equipmentItems[0] = inventoryItems[index];
-            System.out.println("you equipped " + inventoryItems[index]);
-        }
-        else if (inventoryItems[index].getItemClass() == ItemClass.ARMOR){
-            equipmentItems[1] = inventoryItems[index];
-            System.out.println("you equipped " + inventoryItems[index]);
-        }
 
-    }
+    public void equip(int index){
+         switch(inventoryItems[index].getItemClass()){
+            case WEAPON:
+                equipmentItems[0] = inventoryItems[index];
+                break;
+            case ARMOR:
+                equipmentItems[1] = inventoryItems[index];
+                break;
+            case RING:
+                equipmentItems[2] = inventoryItems[index];
+                break;
+            case BOOTS:
+                equipmentItems[3] = inventoryItems[index];
+                break;
+            case ACCESSORY:
+                equipmentItems[4] = inventoryItems[index];
+                break;
+            case CONSUMABLE:
+                System.out.println("Can't equip that");
+                break;
+        }
+        System.out.println("you equipped " + inventoryItems[index]);
+        removeItem(index);
+    }   
         
 
     public String toString(boolean isEquipmentOpen) {
