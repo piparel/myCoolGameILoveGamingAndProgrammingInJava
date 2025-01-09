@@ -12,14 +12,6 @@ public class World {
     private int playerPosX;
     private int playerPosY; 
 
-    public int getPondx() {
-        return pondTile[0];
-    }
-
-    public int getPondy() {
-        return pondTile[1];
-    }
-
     private void initializeMap() {
         for (int x = 0; x <= SIZE; x++) {
             for (int y = 0; y <= SIZE; y++) {
@@ -131,6 +123,13 @@ public class World {
     }
     public int getPlayerPosY(){
         return playerPosY;
+    }
+    public int getPondX() {
+        return pondTile[0];
+    }
+
+    public int getPondY() {
+        return pondTile[1];
     }
 
     public void move(){

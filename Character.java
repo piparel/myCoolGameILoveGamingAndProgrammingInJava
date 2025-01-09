@@ -300,11 +300,9 @@ public class Character {
     public int getHealth(){
         return health;
     }
-
     public int getMaxHealth() {
         return maxHealth;
     }
-
     public int getArmor(){
         return armor;
     }

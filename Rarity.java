@@ -19,6 +19,7 @@ enum Rarity {
                 
             case EPIC:
                 return "Epic";
+                
             case LEGENDARY:
                 return "Legendary";
 
