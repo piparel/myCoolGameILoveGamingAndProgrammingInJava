@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javax.rmi.CORBA.Util;
+
 // TODO: Code comments for better grade 
 
 public class Inventory {
@@ -82,12 +84,14 @@ public class Inventory {
                     System.out.println("Enter the index of the item you would like to use/equip");
                     index = scanner.nextInt();
                     if (inventoryItems[index].getItemClass() == ItemClass.CONSUMABLE) {
+                        Utility.clearScreen();
                         eat(index);
                     }
                     else if (inventoryItems[index] instanceof Equipment){
+                        Utility.clearScreen();
                         equip(index);
                     }
-                    return;
+                    break;
 
                 case "i":
                     isEquipmentOpen = true;
@@ -97,7 +101,7 @@ public class Inventory {
                     switch (userString) {
                         case "q":
                             isEquipmentOpen = false;
-                            return;
+                            break;
                     }
                     break;
 

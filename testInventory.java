@@ -10,9 +10,8 @@ public class testInventory {
         
         System.out.println(knife.getName());
         
-        while(true){
-            inv.openInventory();
-        }
+        inv.openInventory();
+        
     }
 }
 
