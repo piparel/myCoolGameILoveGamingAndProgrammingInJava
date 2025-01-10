@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import javax.rmi.CORBA.Util;
 
 // TODO: Code comments for better grade 
@@ -97,11 +96,18 @@ public class Inventory {
                     isEquipmentOpen = true;
                     System.out.println(this.toString(isEquipmentOpen));
                     System.out.println("press [q] to close your equipment");
+                    System.out.println("press [e] to unequip an item");
                     userString = scanner.nextLine();
                     switch (userString) {
                         case "q":
                             isEquipmentOpen = false;
                             break;
+                        case "e":
+                        System.out.println(this.toString(isEquipmentOpen));
+                        System.out.println("Enter the index of the item you would like to unequip");
+                        index = scanner.nextInt();
+                        unequip(index);
+                        isEquipmentOpen = false;
                     }
                     break;
 
@@ -144,6 +150,22 @@ public class Inventory {
         System.out.println("you equipped " + inventoryItems[index]);
         removeItem(index);
     }   
+
+    public void unequip(int index){
+        if (checkIfFull() == false){
+            if (equipmentItems[index] != null) {
+                addItem(equipmentItems[index]);
+                equipmentItems[index] = null;
+            }
+            else {
+                System.out.println("Invalid choice at removeitem");
+            }
+        }
+        else{
+            System.out.println("your inventory is full!");
+        }
+        
+    }
         
 
     public String toString(boolean isEquipmentOpen) {
