@@ -13,14 +13,6 @@ public class World {
     private int playerPosX;
     private int playerPosY; 
 
-    public int getPondx() {
-        return pondTile[0];
-    }
-
-    public int getPondy() {
-        return pondTile[1];
-    }
-
     private void initializeMap() {
         for (int x = 0; x <= SIZE; x++) {
             for (int y = 0; y <= SIZE; y++) {
@@ -81,6 +73,8 @@ public class World {
 					}} else { builderSpawned=false;}
             }
         }
+
+        //---Special places that spawn after map creation, only places them in valid spots---
         while (shopPlaced == false){
             cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
@@ -118,18 +112,25 @@ public class World {
                 player = true;
             }
         }
+        //-------------------------------------------------------------------------------------
     }
     public void getMap(){
         for (String[] row : map) {
             System.out.println(String.join(" ", row));
         }
     }
-
     public int getPlayerPosX(){
         return playerPosX;
     }
     public int getPlayerPosY(){
         return playerPosY;
+    }
+    public int getPondX() {
+        return pondTile[0];
+    }
+
+    public int getPondY() {
+        return pondTile[1];
     }
 
     public void move(){

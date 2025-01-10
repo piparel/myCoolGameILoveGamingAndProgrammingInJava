@@ -1,10 +1,16 @@
 import java.util.Scanner;
 
+import javax.rmi.CORBA.Util;
+
 // TODO: Code comments for better grade 
 
 public class Inventory {
     private Item[] inventoryItems = new Item[8];
     private int inventoryLength = inventoryItems.length;
+    private Item[] equipmentItems = new Item[5];
+    private int equipmentLength = equipmentItems.length;
+    private boolean isEquipmentOpen = false;
+    
     private boolean isFull = false;
     private final Scanner scanner = new Scanner(System.in);
     private Character player; 
@@ -12,7 +18,6 @@ public class Inventory {
     public void belongsTo(Character player) {
         this.player = player;
     }
-
 
     public void addItem(int index, Item item) {
         if (inventoryItems[index] == null) {
@@ -55,11 +60,12 @@ public class Inventory {
         String userString = "";
 
         while (true) {
-            System.out.println(this);
+            System.out.println(this.toString(isEquipmentOpen));
             System.out.println("");
             System.out.println("press [q] to close your inventory");
             System.out.println("press [d] to drop an item");
-            System.out.println("press [e] to use an Item");
+            System.out.println("press [e] to use/equip an Item");
+            System.out.println("press [i] to open your equipment");
             userString = scanner.nextLine();
 
             switch (userString) {
@@ -75,13 +81,29 @@ public class Inventory {
 
 
                 case "e":
-                    System.out.println("Enter the index of the item you would like to use");
+                    System.out.println("Enter the index of the item you would like to use/equip");
                     index = scanner.nextInt();
-                    if (inventoryItems[index] instanceof Fish) {
+                    if (inventoryItems[index].getItemClass() == ItemClass.CONSUMABLE) {
+                        Utility.clearScreen();
                         eat(index);
-                             
                     }
-                    return;
+                    else if (inventoryItems[index] instanceof Equipment){
+                        Utility.clearScreen();
+                        equip(index);
+                    }
+                    break;
+
+                case "i":
+                    isEquipmentOpen = true;
+                    System.out.println(this.toString(isEquipmentOpen));
+                    System.out.println("press [q] to close your equipment");
+                    userString = scanner.nextLine();
+                    switch (userString) {
+                        case "q":
+                            isEquipmentOpen = false;
+                            break;
+                    }
+                    break;
 
                 default: 
                     System.out.println("invalid choice at OpenInventory");
@@ -92,22 +114,61 @@ public class Inventory {
     }
 
     public void eat(int index) {
+
         System.out.println("you ate the " + inventoryItems[index] + " and gained " + inventoryItems[index].getHealAmount() + " HP");
         player.increaseHealth(inventoryItems[index].getHealAmount());
         removeItem(index);
     }
 
-    public String toString() {
+    public void equip(int index){
+         switch(inventoryItems[index].getItemClass()){
+            case WEAPON:
+                equipmentItems[0] = inventoryItems[index];
+                break;
+            case ARMOR:
+                equipmentItems[1] = inventoryItems[index];
+                break;
+            case RING:
+                equipmentItems[2] = inventoryItems[index];
+                break;
+            case BOOTS:
+                equipmentItems[3] = inventoryItems[index];
+                break;
+            case ACCESSORY:
+                equipmentItems[4] = inventoryItems[index];
+                break;
+            case CONSUMABLE:
+                System.out.println("Can't equip that");
+                break;
+        }
+        System.out.println("you equipped " + inventoryItems[index]);
+        removeItem(index);
+    }   
+        
+
+    public String toString(boolean isEquipmentOpen) {
         String returnString = "";
-        for (int i = 0; i < inventoryLength; i++) {
-            if (inventoryItems[i] == null) {
-                returnString = returnString + "[" + i + "]"+ " [     ], ";
-            }
-            else {
-                returnString = returnString + "[" + i + "]" + " " + inventoryItems[i].toString() + ", ";
+
+        if (isEquipmentOpen){
+            for (int i = 0; i < equipmentLength; i++) {
+                if (equipmentItems[i] == null) {
+                    returnString = returnString + "[" + i + "]"+ " [     ], ";
+                }
+                else {
+                    returnString = returnString + "[" + i + "]" + " " + equipmentItems[i].toString() + ", ";
+                }
             }
         }
-
+        else{
+            for (int i = 0; i < inventoryLength; i++) {
+                if (inventoryItems[i] == null) {
+                    returnString = returnString + "[" + i + "]"+ " [     ], ";
+                }
+                else {
+                    returnString = returnString + "[" + i + "]" + " " + inventoryItems[i].toString() + ", ";
+                }
+            }
+        }
         return returnString;
     }
 }

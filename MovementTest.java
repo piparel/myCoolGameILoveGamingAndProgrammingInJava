@@ -9,8 +9,8 @@ public class MovementTest {
         map.generateMap();
         map.getMap();
 
-        int pondx = map.getPondx();
-        int pondy = map.getPondy();
+        int pondx = map.getPondX();
+        int pondy = map.getPondY();
 
         while (true){
             map.getMap();
