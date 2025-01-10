@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import javax.rmi.CORBA.Util;
 
 // TODO: Code comments for better grade 
 
@@ -59,6 +58,7 @@ public class Inventory {
         String userString = "";
 
         while (true) {
+            Utility.clearScreen();
             System.out.println(this.toString(isEquipmentOpen));
             System.out.println("");
             System.out.println("press [q] to close your inventory");
@@ -69,9 +69,12 @@ public class Inventory {
 
             switch (userString) {
                 case "q":
+                    Utility.clearScreen();
                     return;
 
                 case "d":
+                    Utility.clearScreen();
+                    System.out.println(this.toString(isEquipmentOpen));
                     System.out.println("Enter the index of the item you would like to drop: ");
                     int index = scanner.nextInt(); 
                     scanner.nextLine();
@@ -80,6 +83,8 @@ public class Inventory {
 
 
                 case "e":
+                    Utility.clearScreen();
+                    System.out.println(this.toString(isEquipmentOpen));
                     System.out.println("Enter the index of the item you would like to use/equip");
                     index = scanner.nextInt();
                     if (inventoryItems[index].getItemClass() == ItemClass.CONSUMABLE) {
@@ -93,6 +98,7 @@ public class Inventory {
                     break;
 
                 case "i":
+                    Utility.clearScreen();
                     isEquipmentOpen = true;
                     System.out.println(this.toString(isEquipmentOpen));
                     System.out.println("press [q] to close your equipment");
@@ -103,6 +109,7 @@ public class Inventory {
                             isEquipmentOpen = false;
                             break;
                         case "e":
+                        Utility.clearScreen();
                         System.out.println(this.toString(isEquipmentOpen));
                         System.out.println("Enter the index of the item you would like to unequip");
                         index = scanner.nextInt();
@@ -114,9 +121,7 @@ public class Inventory {
                 default: 
                     System.out.println("invalid choice at OpenInventory");
             }
-
         }
-
     }
 
     public void eat(int index) {

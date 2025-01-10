@@ -11,7 +11,6 @@ public class testInventory {
         System.out.println(knife.getName());
         
         inv.openInventory();
-        
     }
 }
 
