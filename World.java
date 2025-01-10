@@ -44,8 +44,8 @@ public class World {
                 cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
 
                 if (Math.abs(rootX - cx) <= 0 && Math.abs(rootY - cy) <= 0) {
-                    if (map[cx][cy] != "·") {
-                        map[cx][cy] = "·";
+                    if (map[cx][cy] != "-") {
+                        map[cx][cy] = "-";
                         allocatedBlocks++;
                     }
                 } else {
@@ -66,10 +66,10 @@ public class World {
 					else if (builderMoveDirection==7 && cx>0 && cy>0){cy--;cx--;stepped++;}
 
 					if (cx<SIZE && cy<SIZE && cx>1 && cy>1 && stepped<=7){
-					if (map[cx+1][cy]=="·"){if (map[cx][cy]!="·"){map[cx][cy]="·";allocatedBlocks++;}
-					} else if (map[cx-1][cy]=="·"){if (map[cx][cy]!="·"){map[cx][cy]="·";allocatedBlocks++;} 
-					} else if (map[cx][cy+1]=="·"){if (map[cx][cy]!="·"){map[cx][cy]="·";allocatedBlocks++;}
-					} else if (map[cx][cy-1]=="·"){if (map[cx][cy]!="·"){map[cx][cy]="·";allocatedBlocks++;}
+					if (map[cx+1][cy]=="-"){if (map[cx][cy]!="·"){map[cx][cy]="-";allocatedBlocks++;}
+					} else if (map[cx-1][cy]=="-"){if (map[cx][cy]!="-"){map[cx][cy]="-";allocatedBlocks++;} 
+					} else if (map[cx][cy+1]=="-"){if (map[cx][cy]!="-"){map[cx][cy]="-";allocatedBlocks++;}
+					} else if (map[cx][cy-1]=="-"){if (map[cx][cy]!="-"){map[cx][cy]="-";allocatedBlocks++;}
 					}} else { builderSpawned=false;}
             }
         }
@@ -78,7 +78,7 @@ public class World {
         while (shopPlaced == false){
             cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
-            if (map[cx][cy] == "·"){
+            if (map[cx][cy] == "-"){
                 map[cx][cy] = "s";
                 shopPlaced = true;
             }
@@ -86,7 +86,7 @@ public class World {
         while (pondPlaced == false){
             cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
-            if (map[cx][cy] == "·"){
+            if (map[cx][cy] == "-"){
                 map[cx][cy] = "p";
                 pondTile[1] = cx;
                 pondTile[0] = cy;
@@ -96,7 +96,7 @@ public class World {
         while (casinoPlaced == false){
             cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
-            if (map[cx][cy] == "·"){
+            if (map[cx][cy] == "-"){
                 map[cx][cy] = "c";
                 casinoPlaced = true;
             } 
@@ -104,7 +104,7 @@ public class World {
         while (player == false){
             cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
-            if (map[cx][cy] == "·"){
+            if (map[cx][cy] == "-"){
                 map[cx][cy] = playerSymbol;
                 playerPosY = cx;
                 playerPosX = cy;
@@ -169,30 +169,52 @@ public class World {
         System.out.println(movementOptions);
         String direction = scanner.nextLine();
 
+
         if (canMoveUp && direction.equals("u")){
             map[playerPosY][playerPosX] = savedPlace;
-            savedPlace = map[playerPosY-1][playerPosX];
-            map[playerPosY-1][playerPosX] = playerSymbol;
 
+            if (map[playerPosY-1][playerPosX].equals("-")){
+                savedPlace = "·";
+            }
+            else{
+                savedPlace = map[playerPosY-1][playerPosX];
+            }
+            map[playerPosY-1][playerPosX] = playerSymbol;
             playerPosY -= 1;
         }
         else if (canMoveDown && direction.equals("d")){
             map[playerPosY][playerPosX] = savedPlace;
-            savedPlace = map[playerPosY+1][playerPosX];
-            map[playerPosY+1][playerPosX] = playerSymbol;
 
+            if (map[playerPosY+1][playerPosX].equals("-")){
+                savedPlace = "·";
+            }
+            else{
+                savedPlace = map[playerPosY+1][playerPosX];
+            }
+            map[playerPosY+1][playerPosX] = playerSymbol;
             playerPosY += 1;
         }
         else if (canMoveRight && direction.equals("r")){
             map[playerPosY][playerPosX] = savedPlace;
-            savedPlace = map[playerPosY][playerPosX+1];
+
+            if (map[playerPosY][playerPosX+1].equals("-")){
+                savedPlace = "·";
+            }
+            else{
+                savedPlace = map[playerPosY][playerPosX+1];
+            }
             map[playerPosY][playerPosX+1] = playerSymbol;
 
             playerPosX += 1;
         }
         else if (canMoveLeft && direction.equals("l")){
             map[playerPosY][playerPosX] = savedPlace;
-            savedPlace = map[playerPosY][playerPosX-1];
+            if (map[playerPosY][playerPosX-1].equals("-")){
+                savedPlace = "·";
+            }
+            else{
+                savedPlace = map[playerPosY][playerPosX-1];
+            }
             map[playerPosY][playerPosX-1] = playerSymbol;
 
             playerPosX -= 1;
