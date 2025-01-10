@@ -3,10 +3,12 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Random;
 
 public class Character {
 
     Scanner scanner = new Scanner(System.in);  
+    Random random = new Random();
     
 
     private String name;
@@ -19,10 +21,12 @@ public class Character {
     private int armor;
     private int strength;
     private int agility;
+    private int minDmg; 
+    private int maxDmg;
     private int luck;
 
     private double critrate;
-    private static Random critRandom = new Random();
+    private static Random runChance = new Random();
 
     private int coins;
 
@@ -64,6 +68,8 @@ public class Character {
         this.luck = luck;
         this.critrate = critrate;
         this.coins = coins;
+        this.minDmg = (int) 0.8*this.strength;
+        this.maxDmg = (int) 1.2*this.strength;
 
     }
 
@@ -106,6 +112,10 @@ public class Character {
             }
         }
         return chosenClass;
+    }
+    // for testing only
+    public void setClass(String cClass) {
+        this.characterClass = cClass;
     }
 
     public void assignHealth(){
@@ -324,24 +334,36 @@ public class Character {
         return coins;
     }
 
+    public String getWeakness() {
+        return this.weakness;
+    }
+
     public void attack(Enemy enemy) {
-        boolean successfulCrit = false;
 
         // check for random crit
-        double randomNumber = critRandom.nextInt(101);
-        if (randomNumber < critrate) {
-            successfulCrit = true;
+
+        int finalHit = random.nextInt(minDmg, maxDmg);
+
+        if (enemy.getWeakness() == this.characterClass) {
+            finalHit *= 1.5;
+            System.out.println("The Enemy is weak to your class");
         }
 
-        int finalHit = strength - enemy.getArmor();
-        if (successfulCrit) { 
+        if (Utility.rollNumber((int) critrate)) { 
+            System.out.println("CRIT!");
             finalHit *= 2;
         }
+
+        if (Utility.rollNumber(enemy.getAgility())) {
+            System.out.println("The enemy dodged the attack!");
+            finalHit = 0;
+        }
         enemy.decreaseHealth(finalHit);
+        System.out.println("You Dealt " + finalHit + " Damage!");
     }
 
     public boolean run() {
-        if (critRandom.nextInt(2) == 1) {
+        if (runChance.nextInt(2) == 1) {
             System.out.println("You managed to run away!");
             return true;
         }

@@ -1,9 +1,12 @@
+import java.util.Random;
+
 public class Utility {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
+    public static Random random = new Random();
 
 
     public static String colorText(String text, String color) {
@@ -89,5 +92,9 @@ public class Utility {
         System.out.println(healthbar);
 
 
+    }
+
+    public static boolean rollNumber(int probability) {
+        return random.nextInt(1, 101) <= probability;
     }
 }

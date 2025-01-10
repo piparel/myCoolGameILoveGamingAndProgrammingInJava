@@ -9,25 +9,38 @@ public class Enemy {
     private int armor;
     private int strength;
     private int agility;
-    private double critrate;
+    private int critrate;
     private String enemyClass;
+    private String weakness;
+    private int minDmg;
+    private int maxDmg;
 
-    private static Random critRandom = new Random();
+    private static Random random = new Random();
 
     // TODO proper setters
-    public Enemy(int health, int armor, int strength, int agility, double critrate, String enemyClass) {
+    public Enemy(String enemyName, int health, int armor, int strength, int agility, int critrate, String enemyClass) {
+        setName(enemyName);
         this.health = health;
         this.maxHealth = health;
         this.armor = armor;
         this.strength = strength;
+        this.minDmg = (int) 0.8*this.strength;
+        this.maxDmg = (int) 1.2*this.strength;
         this.agility = agility;
         this.critrate = critrate;
         // cant use "class" because of java
         this.enemyClass = enemyClass;
+        if (this.enemyClass == "warrior") {
+            this.weakness = "mage";
+        } else if (this.enemyClass == "mage") {
+            this.weakness = "archer";
+        } else {
+            this.weakness = "warrior";
+        }
     }
 
     public Enemy() {
-        this(100, 0, 5, 0, 2, "warrior");
+        this("testEnemy", 100, 0, 5, 0, 2, "warrior");
     }
 
     public void setName(String name) {
@@ -125,19 +138,30 @@ public class Enemy {
         return critrate;
     }
 
-    public void attack(Character player) {
-        boolean successfulCrit = false;
+    public String getWeakness() {
+        return this.weakness;
+    }
 
+    public void attack(Character player) {
         // check for random crit
-        double randomNumber = critRandom.nextInt(101);
-        if (randomNumber < critrate) {
-            successfulCrit = true;
+
+        int finalHit = random.nextInt(minDmg, maxDmg);
+
+        if (player.getWeakness() == this.characterClass) {
+            finalHit *= 1.5;
+            System.out.println("You are weak to this enemy");
         }
 
-        int finalHit = this.strength - player.getArmor();
-        if (successfulCrit) { 
+        if (Utility.rollNumber((int) critrate)) { 
+            System.out.println("CRIT!");
             finalHit *= 2;
         }
+
+        if (Utility.rollNumber(player.getAgility())) {
+            System.out.println("The player dodged the attack!");
+            finalHit = 0;
+        }
+        System.out.println("the enemy dealt " + finalHit + " damage!");
         player.decreaseHealth(finalHit);
     }
 

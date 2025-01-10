@@ -62,8 +62,8 @@ public class Combat {
 
                     else if (playerInput.equals("f")) {
                         player.attack(enemy);
-                        System.out.println("You attacked the enemy");
                         System.out.println();
+                        scanner.nextLine();
                         Utility.clearScreen();
                         
                         break;
@@ -81,7 +81,6 @@ public class Combat {
             else if (counter == 1) {
                 counter = 0;
                 enemy.attack(player);
-                System.out.println("The Enemy attacked you");
                 Utility.printHealthbar(enemy.getHealth(), enemy.getMaxHealth(), enemy.getName());
                 System.out.println();
             }
@@ -90,6 +89,6 @@ public class Combat {
             }
         }
 
-        System.out.println("The fight is done and you won :D");
+        System.out.println("The fight is done :D");
     }
 }

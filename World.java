@@ -5,6 +5,7 @@ public class World {
     private static final int SIZE = 24;
     private String[][] map = new String[SIZE + 1][SIZE + 1];
     private int[] pondTile = new int[2];
+    private String playerSymbol = Utility.colorText("¤", Utility.ANSI_GREEN);
     Random random = new Random();
 
     String savedPlace = "·";
@@ -110,7 +111,7 @@ public class World {
             cx = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             cy = 2 + (int) Math.floor(random.nextDouble() * (SIZE - 2));
             if (map[cx][cy] == "·"){
-                map[cx][cy] = "¤";
+                map[cx][cy] = playerSymbol;
                 playerPosY = cx;
                 playerPosX = cy;
 
@@ -170,28 +171,28 @@ public class World {
         if (canMoveUp && direction.equals("u")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY-1][playerPosX];
-            map[playerPosY-1][playerPosX] = "¤";
+            map[playerPosY-1][playerPosX] = playerSymbol;
 
             playerPosY -= 1;
         }
         else if (canMoveDown && direction.equals("d")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY+1][playerPosX];
-            map[playerPosY+1][playerPosX] = "¤";
+            map[playerPosY+1][playerPosX] = playerSymbol;
 
             playerPosY += 1;
         }
         else if (canMoveRight && direction.equals("r")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY][playerPosX+1];
-            map[playerPosY][playerPosX+1] = "¤";
+            map[playerPosY][playerPosX+1] = playerSymbol;
 
             playerPosX += 1;
         }
         else if (canMoveLeft && direction.equals("l")){
             map[playerPosY][playerPosX] = savedPlace;
             savedPlace = map[playerPosY][playerPosX-1];
-            map[playerPosY][playerPosX-1] = "¤";
+            map[playerPosY][playerPosX-1] = playerSymbol;
 
             playerPosX -= 1;
         }
