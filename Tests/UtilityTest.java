@@ -1,3 +1,7 @@
+package Tests;
+
+import Game.Utility;
+
 public class UtilityTest {
     public static void main(String[] args) {
         Utility.printInSimpleBox("B  O  X");

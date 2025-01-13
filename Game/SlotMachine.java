@@ -1,3 +1,4 @@
+package Game;
 import java.util.Random;
 
 public class SlotMachine {

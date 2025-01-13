@@ -1,4 +1,5 @@
-enum Rarity {
+package Game;
+public enum Rarity {
     COMMON,
     UNCOMMON,
     RARE,

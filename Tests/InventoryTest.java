@@ -1,4 +1,12 @@
-public class testInventory {
+package Tests;
+
+import Game.Equipment;
+import Game.Fish;
+import Game.Inventory;
+import Game.ItemClass;
+import Game.Rarity;
+
+public class InventoryTest {
     public static void main(String[] args) {
         Inventory inv = new Inventory();
         Fish fish = new Fish(Rarity.LEGENDARY,ItemClass.CONSUMABLE, "Dragonfish", 100, 10);

@@ -1,3 +1,4 @@
+package Game;
 public class EnemyTypes extends Enemy{
    public static Enemy rat(String enemyClass) {
     return new Enemy("rat",

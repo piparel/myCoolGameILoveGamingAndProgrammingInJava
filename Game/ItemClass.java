@@ -1,4 +1,5 @@
-enum ItemClass {
+package Game;
+public enum ItemClass {
     WEAPON,
     ARMOR,
     RING,

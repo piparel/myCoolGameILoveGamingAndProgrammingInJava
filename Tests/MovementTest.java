@@ -1,4 +1,10 @@
+package Tests;
 import java.util.Scanner;
+
+import Game.Fish;
+import Game.Inventory;
+import Game.Utility;
+import Game.World;
 
 public class MovementTest {
     public static void main(String[] args) {

@@ -1,6 +1,10 @@
+package Tests;
 import java.util.Scanner;
 
-public class SimpleFishing {
+import Game.Fish;
+import Game.Inventory;
+
+public class FishingTest {
    public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     Inventory inv = new Inventory(); 

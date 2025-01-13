@@ -1,3 +1,4 @@
+package Game;
 public class Equipment extends Item {
 
     public Equipment(Rarity rarity,ItemClass itemClass, String name, int sellAmount) {

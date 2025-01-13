@@ -1,5 +1,10 @@
+package Tests;
+import Game.Character;
+import Game.Combat;
+import Game.Enemy;
+import Game.EnemyTypes;
 
-public class SimpleCombatTest {
+public class CombatTest {
     public static void main(String[] args) {
         Character testCharacter = new Character(100, 5, 40, 0, 0, 10, 0);
 

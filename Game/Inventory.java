@@ -1,3 +1,4 @@
+package Game;
 import java.util.Scanner;
 
 // TODO: Code comments for better grade 
