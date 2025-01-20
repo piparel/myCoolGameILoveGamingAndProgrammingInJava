@@ -3,3 +3,5 @@ Dropping items forces you to drop them and if you press anything else like d or 
 cant eat fish -> no player stats in tests
 
 make packages
+
+make UML diagramm

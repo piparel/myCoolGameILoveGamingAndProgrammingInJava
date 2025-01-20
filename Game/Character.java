@@ -78,6 +78,10 @@ public class Character {
         this.inv.openInventory();
     }
 
+    public void addItem(Item item) {
+        this.inv.addItem(item);
+    }
+
     public void fish() {
         Fish.catchFish(inv);
     }
@@ -328,6 +332,10 @@ public class Character {
     }
     public double getCritrate(){
         return critrate;
+    }
+
+    public void setCoins(int coins){
+       this.coins = coins; 
     }
     public int getCoins(){
         return coins;
